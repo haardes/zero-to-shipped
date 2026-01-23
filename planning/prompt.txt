@@ -1,0 +1,9 @@
+Build a simple Todo tracking application.
+- Generate a web application that can be used in a browser
+- Style the web application with a modern and sleek look
+- Users will need to register with email and password to login
+- When users login, a dashboard will be displayed that shows a simple explanation of what the application does, and displays the users progress on Todo-lists and items
+- From the dashboard, users will be able to click on any list to see all tasks for that list
+- From the dashboard, users will be able to create todo-lists and todo-items with title and description
+- When users click on a todo-item a modal will appear where they can edit the todo or mark it complete
+- Users should be able to share lists with others. Only allow edits by invited users
