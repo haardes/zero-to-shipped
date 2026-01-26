@@ -1,23 +1,68 @@
+/**
+ * Database type definitions for the Todo Tracking Application.
+ * 
+ * This file contains TypeScript type definitions that mirror the Supabase database schema,
+ * providing type safety for database operations throughout the application.
+ * 
+ * @module types/database
+ * 
+ * @example
+ * // Import the Database type
+ * import { Database } from '@/types/database';
+ * 
+ * @example
+ * // Use with Supabase client for type-safe queries
+ * import { createClient } from '@supabase/supabase-js';
+ * import { Database } from '@/types/database';
+ * 
+ * const supabase = createClient<Database>(url, key);
+ * 
+ * // Type-safe query for todo lists
+ * const { data, error } = await supabase
+ *   .from('todo_list')
+ *   .select('*')
+ *   .eq('owner_user_id', userId);
+ * 
+ * @example
+ * // Insert a new todo item with type checking
+ * const newItem: Database['public']['Tables']['todo_item']['Insert'] = {
+ *   list_id: 'uuid-here',
+ *   title: 'Buy groceries',
+ *   description: 'Milk, eggs, bread',
+ *   created_by_user_id: userId,
+ *   updated_by_user_id: userId
+ * };
+ * 
+ * const { data, error } = await supabase
+ *   .from('todo_item')
+ *   .insert(newItem);
+ * 
+ * @example
+ * // Update with partial fields
+ * const update: Database['public']['Tables']['todo_item']['Update'] = {
+ *   status: 'completed'
+ * };
+ * 
+ * await supabase
+ *   .from('todo_item')
+ *   .update(update)
+ *   .eq('id', itemId);
+ * 
+ * @description
+ * The Database type includes:
+ * - Tables: All database tables with Row, Insert, and Update types
+ *   - todo_list: User-created todo lists
+ *   - todo_item: Individual todo items within lists
+ *   - list_membership: User access and roles for lists
+ *   - invitation: Pending invitations to join lists
+ * - Enums: Database enum types for type-safe status values
+ *   - list_role: User roles (owner, editor, viewer)
+ *   - invitation_status: Invitation states (pending, accepted, declined)
+ *   - todo_item_status: Item completion status (pending, completed)
+ */
 export type Database = {
   public: {
     Tables: {
-      app_user: {
-        Row: {
-          id: string
-          email: string
-          created_at: string
-        }
-        Insert: {
-          id?: string
-          email: string
-          created_at?: string
-        }
-        Update: {
-          id?: string
-          email?: string
-          created_at?: string
-        }
-      }
       todo_list: {
         Row: {
           id: string

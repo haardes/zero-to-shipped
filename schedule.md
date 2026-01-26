@@ -54,3 +54,5 @@ Project design:
 
 
 ## 4. Deployment Phase
+1. Supabase migration
+   Now lets create a migration for supabase

@@ -3,10 +3,30 @@ import { LoginForm } from '@/components/auth/LoginForm'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 
 /**
- * Login Page
+ * Login Page Component
  * 
- * Displays the user login form with email and password fields.
- * Provides a link to the registration page for new users.
+ * A Next.js page component that renders the user authentication login interface.
+ * Displays a centered card with email/password login form and navigation to registration.
+ * 
+ * @component
+ * @example
+ * // This page is automatically rendered by Next.js at the /login route
+ * // No direct import needed - Next.js App Router handles routing
+ * 
+ * // Route: /login
+ * // File: app/(auth)/login/page.tsx
+ * 
+ * @description
+ * Features:
+ * - Email and password authentication form
+ * - Link to registration page for new users
+ * - Responsive centered layout
+ * - Card-based UI with shadcn/ui components
+ * 
+ * @returns {JSX.Element} The login page with authentication form
+ * 
+ * @see {@link LoginForm} - The form component handling authentication logic
+ * @see {@link Card} - shadcn/ui card component for layout
  * 
  * Requirements: 2.1
  */
