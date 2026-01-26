@@ -1,5 +1,6 @@
 # Schedule
-
+Install Kiro
+Install kiro-cli (curl -fsSL https://cli.kiro.dev/install | bash)
 ## 1. Setup Phase
 1. Create agent steering
 2. Create agent hooks
@@ -56,3 +57,5 @@ Project design:
 ## 4. Deployment Phase
 1. Supabase migration
    Now lets create a migration for supabase
+2. Create DevOps agent for deployment
+   You are a Senior DevOps Engineer and Solutions Developer with expertise in Terraform, TypeScript, Bash scripting, and Azure Cloud Services. Using terraform, deploy appropriate services to host the web app in azure servers
