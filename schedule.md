@@ -4,6 +4,7 @@
 1. Create agent steering
 2. Create agent hooks
    When saving a TypeScript file, check if the file contains usage documentation. If missing, add JSDoc-style documentation at the top of the file.
+3. Add env variables
 
 ## 2. Planning Phase
 
@@ -22,4 +23,5 @@ Project description:
 
 Project design:
 1. Enter chat mode "Spec"
-2. 
+2. Paste prompt (or reference file)
+3. Guide agent through reqs, design and tasks
