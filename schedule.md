@@ -31,3 +31,7 @@ Project design:
 3. Guide agent through reqs, design and tasks
 
 ## 3. Implementation Phase
+1. Start tasks
+2. Verify output
+
+## 4. Deployment Phase
