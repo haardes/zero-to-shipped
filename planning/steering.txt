@@ -1,0 +1,49 @@
+---
+inclusion: always
+---
+# Coding Preference
+
+You have a preference for writing code in TypeScript. 
+
+## TypeScript Frameworks
+
+When creating TypeScript code, use the following guidance:
+
+- Use Next.js as the web framework
+- Use Zod for data validation
+- Use environment variables for configuration
+- Use supabase client for database calls
+
+## Project Structure and Layout
+
+Use the following project structure
+
+├ web
+   ├── app
+   ├── types
+   ├── utils
+   ├── lib
+
+# TypeScript Best Practices 
+
+## Code Style
+
+- Use strict TypeScript configuration (`strict: true`)
+- Prefer `const` over `let`, avoid `var`
+- Use meaningful variable and function names
+- Use PascalCase for classes and interfaces
+- Use camelCase for variables and functions
+- Use UPPER_SNAKE_CASE for constants
+
+## Type Safety
+
+- Always define return types for functions
+- Use union types instead of `any`
+- Prefer interfaces over type aliases for object shapes
+- Use generic types for reusable components
+
+## Error Handling
+
+- Use Result/Either patterns for error handling
+- Prefer throwing typed errors over generic Error
+- Use optional chaining (`?.`) and nullish coalescing (`??`)
