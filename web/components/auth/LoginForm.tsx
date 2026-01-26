@@ -21,16 +21,68 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 
-type LoginFormData = z.infer<typeof loginSchema>
-
 /**
  * LoginForm Component
  * 
- * Handles user authentication with email and password validation.
- * Displays inline validation errors and redirects to dashboard on success.
+ * A client-side form component for user authentication. Handles email and password
+ * validation using Zod schemas, displays inline validation errors, and manages
+ * loading states during authentication. On successful login, redirects to the
+ * dashboard. On error, displays toast notifications and clears the password field
+ * while maintaining the email value.
+ * 
+ * @component
+ * @example
+ * // Basic usage in a login page
+ * import { LoginForm } from '@/components/auth/LoginForm'
+ * 
+ * export default function LoginPage() {
+ *   return (
+ *     <div className="container mx-auto max-w-md">
+ *       <h1>Sign In</h1>
+ *       <LoginForm />
+ *     </div>
+ *   )
+ * }
+ * 
+ * @example
+ * // Usage with custom layout
+ * import { LoginForm } from '@/components/auth/LoginForm'
+ * 
+ * export default function AuthPage() {
+ *   return (
+ *     <div className="flex min-h-screen items-center justify-center">
+ *       <div className="w-full max-w-sm space-y-6">
+ *         <div className="text-center">
+ *           <h2 className="text-2xl font-bold">Welcome Back</h2>
+ *           <p className="text-muted-foreground">Sign in to your account</p>
+ *         </div>
+ *         <LoginForm />
+ *       </div>
+ *     </div>
+ *   )
+ * }
+ * 
+ * @remarks
+ * This component uses react-hook-form for form state management and Zod for
+ * validation. It integrates with Supabase authentication via the loginUser
+ * function from @/lib/supabase/auth.
+ * 
+ * Features:
+ * - Email and password validation with inline error messages
+ * - Loading spinner during authentication
+ * - Disabled form inputs during submission
+ * - Toast notifications for success and error states
+ * - Password field cleared on authentication failure
+ * - Email field preserved on authentication failure
+ * - Automatic redirect to /dashboard on successful login
+ * - Router refresh to update session state after login
  * 
  * Requirements: 2.1, 2.2, 2.3, 22.1, 22.4, 27.1, 27.3, 27.4
+ * 
+ * @returns {JSX.Element} The rendered login form component
  */
+
+type LoginFormData = z.infer<typeof loginSchema>
 export function LoginForm() {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
@@ -63,8 +115,8 @@ export function LoginForm() {
       // Show success message
       showSuccess('Login successful!')
       
-      // Redirect to dashboard on success (Requirement 2.2)
-      router.push('/dashboard')
+      // Use window.location for full page reload to ensure cookies are set
+      window.location.href = '/dashboard'
     } catch (error) {
       showError('An unexpected error occurred. Please try again.')
       

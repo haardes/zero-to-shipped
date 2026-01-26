@@ -24,7 +24,7 @@
 
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
+import { createServerClient } from '@supabase/ssr'
 
 /**
  * Middleware function to protect authenticated routes
@@ -48,47 +48,69 @@ import { createClient } from '@supabase/supabase-js'
  * // -> Redirected to /login
  */
 export async function middleware(request: NextRequest): Promise<NextResponse> {
-  // Create Supabase client for server-side session checking
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  
-  // Look for Supabase auth cookies
-  // Supabase stores auth tokens in cookies with project-specific names
-  const cookies = request.cookies.getAll()
-  const authCookie = cookies.find(cookie => 
-    cookie.name.includes('auth-token') || 
-    cookie.name.includes('sb-') && cookie.name.includes('auth')
-  )
-
-  // If no auth cookie exists, redirect to login
-  if (!authCookie) {
-    const loginUrl = new URL('/login', request.url)
-    return NextResponse.redirect(loginUrl)
-  }
-
-  // Create Supabase client to verify session
-  const supabase = createClient(supabaseUrl, supabaseAnonKey, {
-    auth: {
-      persistSession: false,
-    },
-    global: {
-      headers: {
-        cookie: request.headers.get('cookie') || '',
-      },
+  let response = NextResponse.next({
+    request: {
+      headers: request.headers,
     },
   })
 
-  // Get the session from Supabase
-  const { data: { session }, error } = await supabase.auth.getSession()
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        get(name: string) {
+          return request.cookies.get(name)?.value
+        },
+        set(name: string, value: string, options: any) {
+          request.cookies.set({
+            name,
+            value,
+            ...options,
+          })
+          response = NextResponse.next({
+            request: {
+              headers: request.headers,
+            },
+          })
+          response.cookies.set({
+            name,
+            value,
+            ...options,
+          })
+        },
+        remove(name: string, options: any) {
+          request.cookies.set({
+            name,
+            value: '',
+            ...options,
+          })
+          response = NextResponse.next({
+            request: {
+              headers: request.headers,
+            },
+          })
+          response.cookies.set({
+            name,
+            value: '',
+            ...options,
+          })
+        },
+      },
+    }
+  )
 
-  // If no valid session or error, redirect to login
-  if (error || !session) {
+  // Get the session from Supabase
+  const { data: { session } } = await supabase.auth.getSession()
+
+  // If no valid session, redirect to login
+  if (!session) {
     const loginUrl = new URL('/login', request.url)
     return NextResponse.redirect(loginUrl)
   }
 
   // User is authenticated, allow access
-  return NextResponse.next()
+  return response
 }
 
 /**
