@@ -8,4 +8,4 @@ Build a simple Todo tracking application.
 - From the dashboard, users will be able to click on any list to see all tasks for that list
 - From the dashboard, users will be able to create todo-lists and todo-items with title and description
 - When users click on a todo-item a modal will appear where they can edit the todo or mark it complete
-- Users should be able to share lists with others. Only allow edits by invited users
+- Users should be able to share lists with others.
