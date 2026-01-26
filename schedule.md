@@ -13,6 +13,10 @@ Database design:
 1. Define database schema and relationships.
 2. Generate database creation scripts.
    Generate the data model in SQL for Supabase from the ERD diagram. Store it in the data-model directory, in a file called todo-app.sql
+   list_role AS ENUM ('owner', 'editor', 'viewer');
+   invitation_status AS ENUM ('pending', 'accepted', 'declined');
+   todo_item_status AS ENUM ('pending', 'completed');
+   (gen_random_uuid())
 
 Project description:
 
@@ -25,3 +29,5 @@ Project design:
 1. Enter chat mode "Spec"
 2. Paste prompt (or reference file)
 3. Guide agent through reqs, design and tasks
+
+## 3. Implementation Phase

@@ -22,7 +22,6 @@ Use the following project structure
    ├── app
    ├── types
    ├── utils
-   ├── lib
 
 # TypeScript Best Practices 
 
