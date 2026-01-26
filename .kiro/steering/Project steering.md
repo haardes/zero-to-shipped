@@ -37,7 +37,7 @@ Use the following project structure
 
 ## Type Safety
 
-- Always define return types for functions
+- Always define return types for functions (except when return type is JSX.Element)
 - Use union types instead of `any`
 - Prefer interfaces over type aliases for object shapes
 - Use generic types for reusable components

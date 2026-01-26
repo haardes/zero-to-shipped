@@ -29,9 +29,28 @@ Project design:
 1. Enter chat mode "Spec"
 2. Paste prompt (or reference file)
 3. Guide agent through reqs, design and tasks
+4. Show requirements on-hover description
 
 ## 3. Implementation Phase
 1. Start tasks
 2. Verify output
+3. x minutes later
+
+7:04
+1:36
+0:44
+1:49
+3:28
+1:23
+3:50
+1:17
+4:38
+3:06
+4:02
+2:56
+4:28
+4:00
+3:58
+
 
 ## 4. Deployment Phase
