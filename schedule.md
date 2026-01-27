@@ -48,6 +48,7 @@ Project design:
    - I want the simplest deployment, with basic capacity and a public URL that I can access anywhere on the web
    - Use the Terraform MCP server to generate IaC
    - Deploy App to Azure
+4. Now deploy to Sonat Playground
 
 
    You are a Senior DevOps Engineer and Solutions Developer with expertise in Terraform, TypeScript, Bash scripting, and Azure Cloud Services. Using terraform, deploy appropriate services to host the web app in azure servers
