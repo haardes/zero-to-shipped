@@ -1,0 +1,34 @@
+{
+  "name": "devops",
+  "description": "Kiro CLI agent used for packaging and deploying apps",
+  "prompt": "You are a Senior DevOps Engineer and Solutions Developer with expertise in Terraform, TypeScript, Bash scripting, and Azure Cloud Services.",
+  "mcpServers": {
+     "Azure MCP Server": {
+      "command": "npx",
+      "args": ["-y", "@azure/mcp@latest", "server", "start"],
+      "disabled": false
+    },
+    "Terraform": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "hashicorp/terraform-mcp-server"
+      ],
+      "disabled": false
+    }
+  },
+  "tools": [
+    "*"
+  ],
+  "toolAliases": {},
+  "allowedTools": [],
+  "resources": [
+    "file://.kiro/steering/**/*.md"
+  ],
+  "hooks": {},
+  "toolsSettings": {},
+  "useLegacyMcpJson": true,
+  "model": null
+}

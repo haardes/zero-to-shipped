@@ -30,32 +30,24 @@ Project design:
 1. Enter chat mode "Spec"
 2. Paste prompt (or reference file)
 3. Guide agent through reqs, design and tasks
-4. Show requirements on-hover description
+   Show requirements on-hover description
 
 ## 3. Implementation Phase
 1. Start tasks
 2. Verify output
-3. x minutes later
-
-7:04
-1:36
-0:44
-1:49
-3:28
-1:23
-3:50
-1:17
-4:38
-3:06
-4:02
-2:56
-4:28
-4:00
-3:58
-
+3. 48 minutes later
 
 ## 4. Deployment Phase
 1. Supabase migration
    Now lets create a migration for supabase
-2. Create DevOps agent for deployment
+2. Create "DevOps agent" for deployment using Terraform
+   /agent create --name devops
+   /agent swap devops
+3. Prompt Agent to deploy
+   Using the Azure MCP server for the latest doc updates, review this application and update so that it can:
+   - I want the simplest deployment, with basic capacity and a public URL that I can access anywhere on the web
+   - Use the Terraform MCP server to generate IaC
+   - Deploy App to Azure
+
+
    You are a Senior DevOps Engineer and Solutions Developer with expertise in Terraform, TypeScript, Bash scripting, and Azure Cloud Services. Using terraform, deploy appropriate services to host the web app in azure servers
