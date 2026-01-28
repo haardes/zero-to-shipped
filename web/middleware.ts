@@ -54,63 +54,86 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
     },
   })
 
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        get(name: string) {
-          return request.cookies.get(name)?.value
+  // Check if environment variables are available
+  const supabaseUrl = "https://tuaerfuuqnsrlajquhge.supabase.co"
+  const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR1YWVyZnV1cW5zcmxhanF1aGdlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkzOTMxNzcsImV4cCI6MjA4NDk2OTE3N30.fH218FViigm5jU4zLccg4o2puk56pSCoiq1X6qdwaQM"
+
+  if (!supabaseUrl || !supabaseAnonKey) {
+    console.error('Missing Supabase environment variables in middleware')
+    // Allow request to proceed - let the app handle missing env vars
+    return response
+  }
+
+  try {
+    const supabase = createServerClient(
+      supabaseUrl,
+      supabaseAnonKey,
+      {
+        cookies: {
+          get(name: string) {
+            return request.cookies.get(name)?.value
+          },
+          set(name: string, value: string, options: any) {
+            request.cookies.set({
+              name,
+              value,
+              ...options,
+            })
+            response = NextResponse.next({
+              request: {
+                headers: request.headers,
+              },
+            })
+            response.cookies.set({
+              name,
+              value,
+              ...options,
+            })
+          },
+          remove(name: string, options: any) {
+            request.cookies.set({
+              name,
+              value: '',
+              ...options,
+            })
+            response = NextResponse.next({
+              request: {
+                headers: request.headers,
+              },
+            })
+            response.cookies.set({
+              name,
+              value: '',
+              ...options,
+            })
+          },
         },
-        set(name: string, value: string, options: any) {
-          request.cookies.set({
-            name,
-            value,
-            ...options,
-          })
-          response = NextResponse.next({
-            request: {
-              headers: request.headers,
-            },
-          })
-          response.cookies.set({
-            name,
-            value,
-            ...options,
-          })
-        },
-        remove(name: string, options: any) {
-          request.cookies.set({
-            name,
-            value: '',
-            ...options,
-          })
-          response = NextResponse.next({
-            request: {
-              headers: request.headers,
-            },
-          })
-          response.cookies.set({
-            name,
-            value: '',
-            ...options,
-          })
-        },
-      },
+      }
+    )
+
+    // Get the session from Supabase
+    const { data: { session }, error } = await supabase.auth.getSession()
+
+    if (error) {
+      console.error('Error getting session in middleware:', error)
+      const loginUrl = new URL('/login', request.url)
+      return NextResponse.redirect(loginUrl)
     }
-  )
 
-  // Get the session from Supabase
-  const { data: { session } } = await supabase.auth.getSession()
+    // If no valid session, redirect to login
+    if (!session) {
+      const loginUrl = new URL('/login', request.url)
+      return NextResponse.redirect(loginUrl)
+    }
 
-  // If no valid session, redirect to login
-  if (!session) {
+    // User is authenticated, allow access
+    return response
+  } catch (error) {
+    console.error('Middleware error:', error)
+    // On error, redirect to login to be safe
     const loginUrl = new URL('/login', request.url)
     return NextResponse.redirect(loginUrl)
   }
-
-  // User is authenticated, allow access
-  return response
 }
 
 /**
