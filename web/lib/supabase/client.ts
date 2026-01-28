@@ -48,8 +48,8 @@
 import { createBrowserClient } from '@supabase/ssr'
 import type { Database } from '@/types/database'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+const supabaseUrl = "https://tuaerfuuqnsrlajquhge.supabase.co"
+const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR1YWVyZnV1cW5zcmxhanF1aGdlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkzOTMxNzcsImV4cCI6MjA4NDk2OTE3N30.fH218FViigm5jU4zLccg4o2puk56pSCoiq1X6qdwaQM"
 
 /**
  * Configured Supabase browser client instance for client components
