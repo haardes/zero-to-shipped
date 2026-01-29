@@ -1,0 +1,4 @@
+Using the Azure MCP server for the latest doc updates, review this application and update so that it can:
+   - I want the simplest deployment, with basic capacity and a public URL that I can access anywhere on the web
+   - Use the Terraform MCP server to generate IaC
+   - Deploy App to Azure

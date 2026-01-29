@@ -1,0 +1,2 @@
+When saving a TypeScript file, check if the file contains usage documentation. 
+If missing, add JSDoc-style documentation at the top of the file.

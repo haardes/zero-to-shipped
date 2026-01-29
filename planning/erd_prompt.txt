@@ -1,0 +1,3 @@
+Generate the data model in SQL for Supabase from the ERD diagram. 
+Store it in the data-model directory, in a file called todo-app. 
+List_role is either owner, editor or viewer, invitation_status can be pending, accepted or declined and todo_item_status is either pending or completed.

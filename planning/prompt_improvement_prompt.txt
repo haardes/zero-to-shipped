@@ -1,0 +1,2 @@
+Can you review the following prompt and suggest areas where it should be improved. I want the prompt in EARS (Easy Application Requirements Syntax) format. 
+Write the new improved prompt to a new file called "code_plan.md" in the planning directory
